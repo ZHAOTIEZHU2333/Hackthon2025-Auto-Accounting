@@ -1,28 +1,42 @@
-package com.example.auto_accoutnig.data.db;
+package com.example.auto_accouting.data.db;
 
 import android.content.Context;
 import androidx.room.Room;
 
 /**
- * 数据库单例
- * 提供全局复用AppDb 实例 防止多处各建一份DB 造成资源浪费 */
-
+ * Thread-safe provider for a singleton {@link AppDb} instance.
+ */
 public final class DbProvider {
-    private static volatile AppDb INSTANCE;
-    private DbProvider() {}
 
-    public static AppDb get(Context ctx) {
-        if (INSTANCE == null) {
+    /** SQLite file name. */
+    private static final String DB_NAME = "simple_table.db";
+
+    /** Singleton instance guarded by double-checked locking. */
+    private static volatile AppDb instance;
+
+    private DbProvider() {
+        // No instances.
+    }
+
+    /**
+     * Gets the singleton database instance using application context.
+     *
+     * @param context any context
+     * @return app database
+     */
+    public static AppDb get(Context context) {
+        if (instance == null) {
             synchronized (DbProvider.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(
-                            ctx.getApplicationContext(),//避免内存泄露
+                if (instance == null) {
+                    instance = Room.databaseBuilder(
+                            context.getApplicationContext(),
                             AppDb.class,
-                            "simple_table.db"   // 数据库文件名
+                            DB_NAME
                     ).build();
                 }
             }
         }
-        return INSTANCE;
+        return instance;
     }
 }
+

@@ -1,23 +1,38 @@
-package com.example.auto_accoutnig.data.db;
+package com.example.auto_accouting.data.db;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import java.util.List;
 
-
 /**
- * 数据访问接口
- * 写入工具 TableWriter.java
- * 接口 save
+ * Data access object for {@link Table}.
  */
 @Dao
 public interface TableDao {
-    @Insert
-    long insert(Table t);  // 后台调用
 
-    @Query("SELECT * FROM table_entries WHERE timeMillis >= :startMillis AND timeMillis < :endMillis ORDER BY timeMillis ASC")
+    /**
+     * Inserts one record. Call from a background thread.
+     *
+     * @param row the row to insert
+     * @return row id
+     */
+    @Insert
+    long insert(Table row);
+
+    /**
+     * Lists rows within [startMillis, endMillis) ordered by time ascending.
+     *
+     * @param startMillis inclusive start in epoch milliseconds
+     * @param endMillis   exclusive end in epoch milliseconds
+     * @return list of rows
+     */
+    @Query("SELECT * FROM table_entries "
+            + "WHERE timeMillis >= :startMillis AND timeMillis < :endMillis "
+            + "ORDER BY timeMillis ASC")
     List<Table> listInRange(long startMillis, long endMillis);
+}
+
 }
 
 }

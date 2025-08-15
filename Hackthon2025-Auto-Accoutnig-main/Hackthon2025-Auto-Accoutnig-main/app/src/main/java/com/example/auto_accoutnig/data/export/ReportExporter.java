@@ -1,4 +1,28 @@
-package com.example.auto_accoutnig.data.export;
+package com.example.auto_accouting.data.export;
+
+import android.content.ContentResolver;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.net.Uri;
+import com.example.auto_accoutnig.data.db.DbProvider;
+import com.example.auto_accoutnig.data.db.Table;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.text.DecimalFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.ZoneId;
+import java.util.List;
+
+/**
+ * Builds and exports a per-day summed bar chart for a given month.
+ * <p>All drawing is done with {@link Canvas} into a {@link Bitmap}.</p>
+ */
+public final class MonthlyBarChartExporter package com.example.auto_accoutnig.data.export;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -255,3 +279,4 @@ public final class MonthlyBarChartExporter {
         }
     }
 }
+

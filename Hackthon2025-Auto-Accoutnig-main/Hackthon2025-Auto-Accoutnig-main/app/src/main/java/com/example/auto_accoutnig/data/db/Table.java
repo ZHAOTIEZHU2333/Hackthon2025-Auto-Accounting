@@ -1,21 +1,27 @@
-package com.example.auto_accoutnig.data.db;
+package com.example.auto_accouting.data.db;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 /**
- * 表结构
- * 数据库包含三列：时间、描述、金额(分)
- * 表名 table_entries
+ * Record with three colums: time, description and amount(in cent).
+ * <p>Real name is {@code table_entries}
  */
 @Entity(tableName = "table_entries")
 public class Table {
+
+    /** Auto-increment primary key. */
     @PrimaryKey(autoGenerate = true)
     public long id;
 
-    public long timeMillis;      // 时间（毫秒）
-    public String description;   // 描述
-    public long amountMinor;     // 金额（分）
+    /** Event time in epoch milliseconds. */
+    public long timeMillis;
+
+    /** The description for the record. */
+    public String description;
+
+    /** Amount stored in minor units(cents) */
+    public long amountMinor;
 }
 
 }

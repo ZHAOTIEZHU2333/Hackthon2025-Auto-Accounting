@@ -4,6 +4,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 /**
+ * 表结构
  * 数据库包含三列：时间、描述、金额(分)
  * 表名 table_entries
  */

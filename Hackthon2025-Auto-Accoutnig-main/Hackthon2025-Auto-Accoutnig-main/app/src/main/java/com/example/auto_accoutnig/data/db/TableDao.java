@@ -7,6 +7,7 @@ import java.util.List;
 
 
 /**
+ * 数据访问接口
  * 写入工具 TableWriter.java
  * 接口 save
  */

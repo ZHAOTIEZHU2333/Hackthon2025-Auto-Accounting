@@ -34,28 +34,6 @@
 
 
 
-    <!-- 清空日志按钮 -->
-    <Button
-        android:id="@+id/btnClearLog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="清空调试日志" />
 
-    <!-- 日志显示区域 -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#EEEEEE"
-        android:padding="8dp">
 
-        <TextView
-            android:id="@+id/tvLog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:textSize="14sp"
-            android:text="(调试日志会显示在这里)" />
-    </ScrollView>
-
-</LinearLayout>
+    </LinearLayout>

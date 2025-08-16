@@ -8,9 +8,11 @@ android {
     namespace = "com.example.auto_accounting"
     compileSdk = 36
 
+
+
     defaultConfig {
         applicationId = "com.example.auto_accounting"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -60,4 +62,8 @@ dependencies {
 
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
+
+    // Room (Java)
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
 }

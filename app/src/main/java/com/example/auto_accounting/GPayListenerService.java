@@ -1,23 +1,21 @@
 package com.example.auto_accounting;
 
 import android.app.Notification;
-import android.content.Intent;
 import android.os.Bundle;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.text.TextUtils;
 import android.util.Log;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import com.example.auto_accounting.data.repo.TableWriter;
+
+
 import java.util.Locale;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 监听所有 App 通知，解析 金额/商家/时间，并通过广播抛出事件。
- * 解析成功后通过应用内广播通知主界面显示（仅限本应用接收）。
+ * 监听所有 App 通知，解析 金额/商家/时间，并通过 TableWriter 写入本地表格。
  */
 public class GPayListenerService extends NotificationListenerService {
 
@@ -97,16 +95,15 @@ public class GPayListenerService extends NotificationListenerService {
             long ts = System.currentTimeMillis();
             Log.i(TAG, "Parsed -> amount=" + amount + ", merchant=" + merchant + ", ts=" + ts);
 
-            // === 核心：发一条应用内广播给同事 ===
-            Intent event = new Intent(ACTION_GPAY_PAYMENT_DETECTED);
-            event.putExtra(EXTRA_AMOUNT, amount);
-            event.putExtra(EXTRA_MERCHANT, merchant);
-            event.putExtra(EXTRA_TIMESTAMP, ts);
-            event.putExtra(EXTRA_RAW_TEXT, raw);
-            // 仅限本应用接收，主界面动态接收并显示到 activity_main.xml 的日志区域
-            event.setPackage(getPackageName());
-            Log.d(TAG, "UI event prepared -> amount=" + amount + " merchant=" + merchant + " ts=" + ts);
-            sendBroadcast(event);
+            // === 写入本地表格（数据库） ===
+            long amountMinor = Math.round(amount * 100.0); // 转为“分”
+            String description = merchant;                 // 描述字段：商家名
+            try {
+                TableWriter.save(getApplicationContext(), ts, description, amountMinor);
+                Log.i(TAG, "Saved to table -> amountMinor=" + amountMinor + ", desc=" + description + ", ts=" + ts);
+            } catch (Throwable dbErr) {
+                Log.e(TAG, "Failed to save into table", dbErr);
+            }
 
         } catch (Throwable t) {
             Log.e(TAG, "onNotificationPosted error", t);

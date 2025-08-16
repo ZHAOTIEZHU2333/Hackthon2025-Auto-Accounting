@@ -1,4 +1,4 @@
-package com.example.auto_accoutnig;
+package com.example.auto_accounting;
 
 import android.Manifest;
 import android.content.Context;

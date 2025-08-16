@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.auto_accoutnig"
+    namespace = "com.example.auto_accounting"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.auto_accoutnig"
+        applicationId = "com.example.auto_accounting"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

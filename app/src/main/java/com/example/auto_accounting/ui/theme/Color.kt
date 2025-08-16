@@ -1,4 +1,4 @@
-package com.example.auto_accoutnig.ui.theme
+package com.example.auto_accounting.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

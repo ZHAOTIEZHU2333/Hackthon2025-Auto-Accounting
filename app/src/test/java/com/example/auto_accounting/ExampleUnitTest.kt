@@ -1,4 +1,4 @@
-package com.example.auto_accoutnig
+package com.example.auto_accounting
 
 import org.junit.Test
 

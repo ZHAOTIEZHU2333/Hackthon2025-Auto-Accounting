@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Auto-Accoutnig"
+rootProject.name = "Auto-Accounting"
 include(":app")
  

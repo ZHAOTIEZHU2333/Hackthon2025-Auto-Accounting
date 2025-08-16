@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_chart_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_lg"
+    android:gravity="center_horizontal">
+
+    <TextView        android:id="@+id/text_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/status_ready"
+        android:textSize="@dimen/text_size_md"
+        android:padding="@dimen/spacing_sm" />
+
+    <LinearLayout
+        android:id="@+id/layout_actions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/spacing_md">
+
+        <Button
+            android:id="@+id/button_preview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minHeight="@dimen/btn_min_height"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:autoSizeTextType="uniform"
+            app:autoSizeMinTextSize="@dimen/btn_text_min"
+            app:autoSizeMaxTextSize="@dimen/text_size_md"
+            app:autoSizeStepGranularity="1sp"
+            android:text="@string/action_preview_current_month" />
+
+        <Space
+            android:layout_width="@dimen/spacing_md"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/button_export_png"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minHeight="@dimen/btn_min_height"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:autoSizeTextType="uniform"
+            app:autoSizeMinTextSize="@dimen/btn_text_min"
+            app:autoSizeMaxTextSize="@dimen/text_size_md"
+            app:autoSizeStepGranularity="1sp"
+            android:text="@string/action_export_png" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/image_chart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/spacing_lg"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/desc_chart_preview" />
+</LinearLayout>

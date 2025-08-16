@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:padding="16dp" android:gravity="center">
+
+    <TextView
+        android:id="@+id/tvStatus" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="Checking permissions..."
+        android:textSize="16sp" android:padding="8dp"/>
+
+    <Button
+        android:id="@+id/btnNotifAccess" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="Open Notification Access Settings"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/btnContinue" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="Continue"
+        android:layout_marginTop="12dp"/>
+</LinearLayout>

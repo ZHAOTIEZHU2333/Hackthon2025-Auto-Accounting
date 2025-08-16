@@ -37,6 +37,8 @@ android {
     }
     buildFeatures {
         compose = true
+        
+
     }
 }
 

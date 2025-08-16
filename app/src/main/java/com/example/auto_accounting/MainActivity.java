@@ -1,31 +1,22 @@
 package com.example.auto_accounting;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 
 public class MainActivity extends AppCompatActivity {
-    private static final int REQ_CODE_STORAGE = 1001;
 
     private TextView tvStatus;
     private Button btnNotifAccess;
-    private Button btnStoragePerm;
-
+    private Button btnContinue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,36 +24,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tvStatus = findViewById(R.id.tvStatus);
-//        btnNotifAccess = findViewById(R.id.btnNotifAccess);
+        btnNotifAccess = findViewById(R.id.btnNotifAccess);
+        btnContinue = findViewById(R.id.btnContinue);
 
-
-        btnNotifAccess.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isNotificationListenerEnabled(MainActivity.this)) {
-                    Toast.makeText(MainActivity.this, "Notification access already granted", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
+        // 按钮1：获取“通知访问”权限（打开系统设置）
+        btnNotifAccess.setOnClickListener(v -> {
+            if (isNotificationListenerEnabled(MainActivity.this)) {
+                Toast.makeText(MainActivity.this, "通知访问已授权", Toast.LENGTH_SHORT).show();
+            } else {
                 new AlertDialog.Builder(MainActivity.this)
-                    .setMessage("This app requires notification access to work properly. Please enable it in the settings.")
-                    .setPositiveButton("Open Settings", (dialog, which) -> {
-                        try {
-                            startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    })
-                    .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
-                    .show();
+                        .setMessage("需要开启“通知访问”权限才能正常工作，请在设置中启用。")
+                        .setPositiveButton("打开设置", (dialog, which) -> {
+                            try {
+                                startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        })
+                        .setNegativeButton("取消", (dialog, which) -> dialog.dismiss())
+                        .show();
             }
         });
 
-        btnStoragePerm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requestStoragePermissionsIfNeeded();
-            }
+        // 按钮2：Continue → 跳转到 StartActivity
+        btnContinue.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, StartActivity.class);
+            startActivity(i);
         });
 
         updateStatus();
@@ -75,12 +62,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateStatus() {
-        String notifLine = "Notification access is：" + (isNotificationListenerEnabled(this) ? "able" : "enable");
-        String storageLine = "Memory access is：" + (hasStoragePermissions() ? "granted" : "ungranted");
-        tvStatus.setText(notifLine + "\n" + storageLine);
+        String notifLine = "通知访问：" + (isNotificationListenerEnabled(this) ? "已启用" : "未启用");
+        tvStatus.setText(notifLine);
     }
 
-
+    /** 是否已授予“通知访问” */
     public static boolean isNotificationListenerEnabled(Context context) {
         String pkgName = context.getPackageName();
         String flat = Secure.getString(context.getContentResolver(), "enabled_notification_listeners");
@@ -93,42 +79,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
-
-
-    private boolean hasStoragePermissions() {
-        int read = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        int write = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        return read == PackageManager.PERMISSION_GRANTED && write == PackageManager.PERMISSION_GRANTED;
-    }
-
-
-    private void requestStoragePermissionsIfNeeded() {
-        if (hasStoragePermissions()) {
-            updateStatus();
-            return;
-        }
-
-        ActivityCompat.requestPermissions(
-                this,
-                new String[] {
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                },
-                REQ_CODE_STORAGE
-        );
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQ_CODE_STORAGE) {
-            updateStatus();
-        }
-    }
-
-
-
 }

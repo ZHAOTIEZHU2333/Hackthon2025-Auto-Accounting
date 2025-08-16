@@ -6,7 +6,6 @@
     android:padding="16dp"
     android:gravity="center">
 
-
     <TextView
         android:id="@+id/tvStatus"
         android:layout_width="match_parent"
@@ -15,20 +14,20 @@
         android:textSize="16sp"
         android:padding="8dp" />
 
+    <!-- 按钮1：打开通知访问设置（获取阅读通知的权限） -->
     <Button
-        android:id="@+id/btnGoStart"
+        android:id="@+id/btnNotifAccess"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="进入 Start 页面"
+        android:text="打开通知访问设置"
         android:layout_marginTop="16dp"/>
 
+    <!-- 按钮2：Continue，跳转到 StartActivity -->
+    <Button
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Continue"
+        android:layout_marginTop="12dp"/>
 
-
-
-
-
-
-
-
-
-    </LinearLayout>
+</LinearLayout>

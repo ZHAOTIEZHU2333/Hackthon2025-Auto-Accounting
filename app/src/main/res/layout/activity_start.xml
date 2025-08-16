@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp">
 
     <Button
-        android:id="@+id/button_start"
-        android:layout_width="200dp"
-        android:layout_height="56dp"
-        android:layout_gravity="center"
-        android:text="start" />
-</FrameLayout>
+        android:id="@+id/btnStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="开始监听并打开数据库（自动保存）"
+        android:minHeight="48dp" />
 
+</LinearLayout>

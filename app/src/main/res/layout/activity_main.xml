@@ -15,21 +15,16 @@
         android:textSize="16sp"
         android:padding="8dp" />
 
-
     <Button
-        android:id="@+id/btnNotifAccess"
+        android:id="@+id/btnGoStart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/open_notification_access_settings"
-        android:layout_marginTop="16dp" />
+        android:text="进入 Start 页面"
+        android:layout_marginTop="16dp"/>
 
 
-    <Button
-        android:id="@+id/btnStoragePerm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/request_storage_permissions"
-        android:layout_marginTop="12dp" />
+
+
 
 
 

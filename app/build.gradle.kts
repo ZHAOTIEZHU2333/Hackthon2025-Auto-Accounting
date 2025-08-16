@@ -8,8 +8,6 @@ android {
     namespace = "com.example.auto_accounting"
     compileSdk = 36
 
-
-
     defaultConfig {
         applicationId = "com.example.auto_accounting"
         minSdk = 26

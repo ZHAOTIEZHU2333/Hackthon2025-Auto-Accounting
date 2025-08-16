@@ -21,5 +21,5 @@ public class Table {
     public String description;
 
     /** Amount stored in minor units(cents) */
-    public long amountMinor;
+    public double amountMinor;
 }

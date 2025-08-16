@@ -29,19 +29,19 @@ public final class TableWriter {
      * @param context     any context
      * @param timeMillis  event time in epoch milliseconds
      * @param description description text
-     * @param amountMinor amount in cents
+     * @param amount amount in cents
      */
     public static void save(
             Context context,
             long timeMillis,
             String description,
-            long amountMinor
+            double amount
     ) {
         EXECUTOR_IO.execute(() -> {
             Table row = new Table();
             row.timeMillis = timeMillis;
             row.description = description;
-            row.amountMinor = amountMinor;
+            row.amountMinor = amount;
             DbProvider.get(context).tableDao().insert(row);
         });
     }

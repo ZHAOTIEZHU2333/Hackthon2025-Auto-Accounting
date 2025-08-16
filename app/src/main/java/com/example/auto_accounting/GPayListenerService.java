@@ -96,11 +96,11 @@ public class GPayListenerService extends NotificationListenerService {
             Log.i(TAG, "Parsed -> amount=" + amount + ", merchant=" + merchant + ", ts=" + ts);
 
             // === 写入本地表格（数据库） ===
-            long amountMinor = Math.round(amount * 100.0); // 转为“分”
+            long amountMinor = Math.round(amount); // 转为“分”
             String description = merchant;                 // 描述字段：商家名
             try {
-                TableWriter.save(getApplicationContext(), ts, description, amountMinor);
-                Log.i(TAG, "Saved to table -> amountMinor=" + amountMinor + ", desc=" + description + ", ts=" + ts);
+                TableWriter.save(getApplicationContext(), ts, description, amount);
+                Log.i(TAG, "Saved to table -> amountMinor=" + amount + ", desc=" + description + ", ts=" + ts);
             } catch (Throwable dbErr) {
                 Log.e(TAG, "Failed to save into table", dbErr);
             }

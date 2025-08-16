@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tvStatus = findViewById(R.id.tvStatus);
-        btnNotifAccess = findViewById(R.id.btnNotifAccess);
-        btnStoragePerm = findViewById(R.id.btnStoragePerm);
+//        btnNotifAccess = findViewById(R.id.btnNotifAccess);
+
 
         btnNotifAccess.setOnClickListener(new View.OnClickListener() {
             @Override

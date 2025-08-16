@@ -4,15 +4,16 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -38,13 +39,22 @@ public class MainActivity extends AppCompatActivity {
         btnNotifAccess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                try {
-                    startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
-                } catch (Exception e) {
-
-                    e.printStackTrace();
+                if (isNotificationListenerEnabled(MainActivity.this)) {
+                    Toast.makeText(MainActivity.this, "Notification access already granted", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
+                new AlertDialog.Builder(MainActivity.this)
+                    .setMessage("This app requires notification access to work properly. Please enable it in the settings.")
+                    .setPositiveButton("Open Settings", (dialog, which) -> {
+                        try {
+                            startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    })
+                    .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                    .show();
             }
         });
 

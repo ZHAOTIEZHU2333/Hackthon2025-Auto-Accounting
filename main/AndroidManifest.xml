@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.auto_accounting">
+
+    <!-- Android 13+ 发送（测试）通知需要此权限 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+
+        <!-- 启动页：授权页 -->
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!-- 开始页 -->
+        <activity
+            android:name=".ui.StartActivity"
+            android:exported="false" />
+
+
+        <!-- 图表页 -->
+        <activity
+            android:name=".ui.ChartActivity"
+            android:exported="false" />
+
+        <!-- 通知监听服务 -->
+        <service
+            android:name=".notify.GPayListenerService"
+            android:exported="true"
+            android:label="GPay Listener"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService"/>
+            </intent-filter>
+        </service>
+
+    </application>
+</manifest>
+

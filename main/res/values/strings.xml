@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Auto-Accoutnig</string>
+    <string name="checking_permissions">Checking permissions...</string>
+    <string name="open_notification_access_settings">Open Notification Access Settings</string>
+    <string name="request_storage_permissions">Request Storage Permissions</string>
+
+    <!-- Status text -->
+    <string name="status_ready">Ready</string>
+    <string name="status_generating">Generating preview…</string>
+    <string name="status_exporting">Exporting…</string>
+    <string name="status_export_done">Exported to the selected location</string>
+    <string name="status_failed">Operation failed: %1$s</string>
+
+    <!-- Buttons -->
+    <string name="action_preview_current_month">Monthly spend</string>
+    <string name="action_export_png">Export PNG</string>
+    <string name="open_chart">Open Chart</string>
+
+    <!-- Accessibility -->
+    <string name="desc_chart_preview">Bar chart preview of the current month</string>
+</resources>

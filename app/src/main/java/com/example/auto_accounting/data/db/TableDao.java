@@ -1,8 +1,9 @@
 package com.example.auto_accounting.data.db;
 
+import androidx.room.Query;
 import androidx.room.Dao;
 import androidx.room.Insert;
-import androidx.room.Query;
+
 import java.util.List;
 
 /**
@@ -31,4 +32,7 @@ public interface TableDao {
             + "WHERE timeMillis >= :startMillis AND timeMillis < :endMillis "
             + "ORDER BY timeMillis ASC")
     List<Table> listInRange(long startMillis, long endMillis);
+
+    @Query("SELECT * FROM table_entries ORDER BY timeMillis DESC LIMIT :limit")
+    List<Table> recent(int limit);
 }
